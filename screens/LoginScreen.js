@@ -14,21 +14,15 @@ import {
 } from "react-native";
 
 import { colors } from "../styles/global";
-import PlusIcon from "../components/ui/PlusIcon";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
-const RegistrationScreen = () => {
-  const [login, setLogin] = useState("");
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
-
-  const handleLoginChange = (value) => {
-    setLogin(value);
-  };
 
   const handleEmailChange = (value) => {
     setEmail(value);
@@ -42,13 +36,13 @@ const RegistrationScreen = () => {
     setIsPasswordVisible((prev) => !prev);
   };
 
-  const onSignUp = (data) => {
+  const onLogin = (data) => {
     console.log(data);
-    console.log("Sig Up");
+    console.log("Log In");
   };
 
-  const onLogin = () => {
-    console.log("Log In");
+  const onSignUp = () => {
+    console.log("Sign Up");
   };
 
   const showButton = (
@@ -71,25 +65,12 @@ const RegistrationScreen = () => {
           behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
           <View style={styles.formContainer}>
-            <View style={styles.profileImageWrapper}>
-              <TouchableOpacity style={styles.addButton}>
-                <PlusIcon style={styles.addButtonIcon} />
-              </TouchableOpacity>
-              <Image />
-            </View>
-
-            <Text style={styles.title}>Реєстрація</Text>
+            <Text style={styles.title}>Увійти</Text>
 
             <View style={[styles.innerContainer, styles.inputContainer]}>
               <Input
-                value={login}
-                autofocus={true}
-                placeholder="Логін"
-                onTextChange={handleLoginChange}
-              />
-
-              <Input
                 value={email}
+                autofocus={true}
                 placeholder="Адреса електронної пошти"
                 onTextChange={handleEmailChange}
               />
@@ -105,17 +86,17 @@ const RegistrationScreen = () => {
             </View>
 
             <View style={[styles.innerContainer, styles.buttonContainer]}>
-              <Button onPress={onSignUp}>
+              <Button onPress={onLogin}>
                 <Text style={[styles.baseText, styles.loginButtonText]}>
-                  Зареєструватися
+                  Увійти
                 </Text>
               </Button>
 
               <View style={styles.signUpContainer}>
                 <Text style={[styles.baseText, styles.passwordButtonText]}>
-                  Вже є акаунт?{" "}
-                  <TouchableWithoutFeedback onPress={onLogin}>
-                    <Text style={styles.signUpText}>Увійти</Text>
+                  Немає акаунту?
+                  <TouchableWithoutFeedback onPress={onSignUp}>
+                    <Text style={styles.signUpText}> Зареєструватися</Text>
                   </TouchableWithoutFeedback>
                 </Text>
               </View>
@@ -127,7 +108,7 @@ const RegistrationScreen = () => {
   );
 };
 
-export default RegistrationScreen;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -153,34 +134,12 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: SCREEN_WIDTH,
-    height: "62%",
+    height: "55%",
     backgroundColor: colors.white,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     paddingHorizontal: 16,
-    paddingTop: 92,
-  },
-  profileImageWrapper: {
-    position: "absolute",
-    left: "50%",
-    top: -60,
-    width: 120,
-    height: 120,
-    backgroundColor: colors.light_gray,
-    borderRadius: 16,
-    transform: "translateX(-50%)",
-  },
-  addButton: {
-    display: "block",
-    position: "absolute",
-    width: 25,
-    height: 25,
-    bottom: 14,
-    right: -13,
-  },
-  addButtonIcon: {
-    borderRadius: "50%",
-    backgroundColor: colors.white,
+    paddingTop: 32,
   },
   title: {
     fontSize: 30,
