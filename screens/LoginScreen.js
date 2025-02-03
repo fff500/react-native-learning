@@ -19,7 +19,7 @@ import Button from "../components/ui/Button";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation, setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
@@ -38,11 +38,12 @@ const LoginScreen = () => {
 
   const onLogin = (data) => {
     console.log(data);
+    setIsLoggedIn(true);
     console.log("Log In");
   };
 
   const onSignUp = () => {
-    console.log("Sign Up");
+    navigation.navigate("Signup");
   };
 
   const showButton = (

@@ -20,7 +20,7 @@ import Button from "../components/ui/Button";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,7 +48,7 @@ const RegistrationScreen = () => {
   };
 
   const onLogin = () => {
-    console.log("Log In");
+    navigation.navigate("Login");
   };
 
   const showButton = (
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: SCREEN_WIDTH,
-    height: "62%",
+    height: "68%",
     backgroundColor: colors.white,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,

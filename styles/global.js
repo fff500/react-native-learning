@@ -6,4 +6,5 @@ export const colors = {
   blue: "#1b4371",
   orange: "#ff6c00",
   text_gray: "#bdbdbd",
+  bottom_icons: "rgba(33, 33, 33, 0.8)",
 };

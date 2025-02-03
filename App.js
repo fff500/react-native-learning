@@ -1,21 +1,18 @@
-import { StyleSheet, View } from "react-native";
-import RegistrationScreen from "./screens/RegistrationScreen";
-import LoginScreen from "./screens/LoginScreen";
+import { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthNavigator from "./navigation/AuthNavigator";
+import BottomTabNavigator from "./navigation/BottomTabNavigator";
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <View style={styles.container}>
-      {/* <RegistrationScreen /> */}
-      <LoginScreen />
-    </View>
+    <NavigationContainer>
+      {isLoggedIn ? (
+        <BottomTabNavigator />
+      ) : (
+        <AuthNavigator setIsLoggedIn={setIsLoggedIn} />
+      )}
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
