@@ -18,10 +18,13 @@ import CameraIcon from "../icons/CameraIcon";
 import TrashIcon from "../icons/TrashIcon";
 import DefaultImage from "../assets/default.jpg";
 import { colors } from "../styles/global";
-import { addPost } from "../utils/firestore";
+import { addPostDB } from "../utils/firestore";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addPost } from "../redux/reducers/postsSlice";
 
 const CreatePostScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [postImage, setPostImage] = useState("");
   const [postName, setPostName] = useState("");
@@ -70,8 +73,7 @@ const CreatePostScreen = () => {
     setPostLocation("");
 
     const postId = `${Date.now()}`;
-
-    addPost(postId, {
+    const newPost = {
       id: postId,
       image: postImage,
       name: postName,
@@ -83,7 +85,12 @@ const CreatePostScreen = () => {
         lon: location?.coords?.longitude,
       },
       userId: uid,
-    });
+    };
+
+    addPostDB(postId, newPost);
+
+    dispatch(addPost(newPost));
+
     navigation.navigate("Home");
   };
 

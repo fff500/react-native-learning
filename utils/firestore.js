@@ -23,7 +23,7 @@ export const getUser = async (userId) => {
   }
 };
 
-export const addPost = async (postId, post) => {
+export const addPostDB = async (postId, post) => {
   try {
     await setDoc(doc(db, "posts", postId), post, { merge: true });
     console.log("Post added:", postId);

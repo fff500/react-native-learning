@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View, FlatList } from "react-native";
 import UserAvatar from "../assets/keira-knightley.jpg";
 import PostCard from "../components/PostCard";
 import { colors } from "../styles/global";
 import { useSelector } from "react-redux";
 import { fetchAllPosts } from "../utils/firestore";
+import { useDispatch } from "react-redux";
+import { setPosts } from "../redux/reducers/postsSlice";
 
 const PostsScreen = () => {
-  const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.posts);
   const { displayName, email } = useSelector((state) => state.user.userData);
 
   useEffect(() => {
@@ -15,7 +18,7 @@ const PostsScreen = () => {
       try {
         const result = await fetchAllPosts();
 
-        setPosts(result);
+        dispatch(setPosts(result));
       } catch (error) {
         console.error(error);
       }
